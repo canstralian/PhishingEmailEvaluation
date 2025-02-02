@@ -28,6 +28,14 @@ jobs:
           poetry run isort --check-only .
           poetry run flake8 .
           poetry run bandit -r .
+      - name: Hugging Push
+        uses: backendcloud/hugging-push@v0.2.3
+        with:
+          huggingface_repo: Canstralian/PhishingEmailEvaluation
+          hf_token: ${{ secrets.HF_TOKEN }} # ensure you have this secret set in your repository
+          repo_type: space
+          space_sdk: gradio
+          private: false
   test:
     runs-on: ubuntu-latest
     steps:
