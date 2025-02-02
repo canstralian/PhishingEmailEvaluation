@@ -10,6 +10,14 @@ pinned: false
 short_description: Phishing Email Evaluation
 ---
 
+![Python Version](https://img.shields.io/pypi/pyversions/your-package)
+![Forks](https://img.shields.io/github/forks/canstralian/PhishingEmailEvaluation)
+![Coverage Status](https://img.shields.io/codecov/c/github/canstralian/PhishingEmailEvaluation)
+![Python Version](https://img.shields.io/pypi/pyversions/your-package)
+![License](https://img.shields.io/github/license/canstralian/PhishingEmailEvaluation)
+![Issues](https://img.shields.io/github/issues/canstralian/PhishingEmailEvaluation)
+![Stars](https://img.shields.io/github/stars/canstralian/PhishingEmailEvaluation)
+
 # Phishing Detection Project
 
 This project demonstrates a phishing detection application powered by Transformers and served via a Gradio web interface. The project includes:
