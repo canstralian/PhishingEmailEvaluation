@@ -1,22 +1,31 @@
-# This is a Gradio app that evaluates phishing URLs and emails.
 import gradio as gr
 
-# Define a function to evaluate a URL for phishing.
+# Define the evaluation functions.
 def evaluate_url(url):
-    # Placeholder function to simulate URL evaluation.
-    # In a real application, this would contain the logic to evaluate the URL.
+    # Simulated URL evaluation.
     return "This URL is safe" if "example.com" in url else "This URL is suspicious"
 
-# Define a function to evaluate an email for phishing.
 def evaluate_email(email):
-    # Placeholder function to simulate email evaluation.
-    # In a real application, this would contain the logic to evaluate the email.
+    # Simulated email evaluation.
     return "This email is safe" if "example.com" in email else "This email is suspicious"
 
-# Create Gradio interfaces for URL and email evaluation.
-url_interface = gr.Interface(fn=evaluate_url, inputs="text", outputs="text", title="Phishing URL Evaluation")
-email_interface = gr.Interface(fn=evaluate_email, inputs="text", outputs="text", title="Phishing Email Evaluation")
+# Create the app using Blocks and Tabs.
+with gr.Blocks() as demo:
+    gr.Markdown("# Phishing Evaluation App")
+    with gr.Tabs():
+        # Tab for URL evaluation.
+        with gr.TabItem("URL Evaluation"):
+            url_input = gr.Textbox(label="Enter URL", placeholder="https://www.example.com")
+            url_output = gr.Textbox(label="Evaluation")
+            url_btn = gr.Button("Evaluate URL")
+            url_btn.click(fn=evaluate_url, inputs=url_input, outputs=url_output)
+        
+        # Tab for Email evaluation.
+        with gr.TabItem("Email Evaluation"):
+            email_input = gr.Textbox(label="Enter Email", placeholder="user@example.com")
+            email_output = gr.Textbox(label="Evaluation")
+            email_btn = gr.Button("Evaluate Email")
+            email_btn.click(fn=evaluate_email, inputs=email_input, outputs=email_output)
 
-# Launch the interfaces.
-url_interface.launch(show_error=True)
-email_interface.launch()
+# Launch the combined app.
+demo.launch()
