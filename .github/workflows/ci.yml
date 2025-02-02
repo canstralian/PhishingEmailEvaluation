@@ -18,8 +18,8 @@ jobs:
           python-version: '3.8'
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "${{ runner.home }}/.local/bin" >> $GITHUB_PATH
+          curl -sSL https://install.python-poetry.org | POETRY_HOME=$HOME/.poetry python3 -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
       - name: Install dependencies
         run: poetry install
       - name: Run linters
@@ -32,7 +32,7 @@ jobs:
         uses: backendcloud/hugging-push@v0.2.3
         with:
           huggingface_repo: Canstralian/PhishingEmailEvaluation
-          hf_token: ${{ secrets.HF_TOKEN }} # ensure you have this secret set in your repository
+          hf_token: ${{ secrets.HF_TOKEN }}
           repo_type: space
           space_sdk: gradio
           private: false
@@ -48,8 +48,8 @@ jobs:
           python-version: '3.8'
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "${{ runner.home }}/.local/bin" >> $GITHUB_PATH
+          curl -sSL https://install.python-poetry.org | POETRY_HOME=$HOME/.poetry python3 -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
       - name: Install dependencies
         run: poetry install
       - name: Run tests and generate coverage report
