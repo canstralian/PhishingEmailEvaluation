@@ -1,5 +1,5 @@
-numpy
-pandas
-plotly
-transformers_js_py
-matplotlib
+gradio
+transformers
+datasets
+evaluate
+torch
