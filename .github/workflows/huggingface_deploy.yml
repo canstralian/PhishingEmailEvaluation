@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         ref: ${{ github.sha }}
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -34,11 +34,16 @@ jobs:
         pip install -r requirements.txt
 
     - name: Authenticate with Huggingface
-      run: huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+      run: |
+        echo "Logging into Hugging Face..."
+        echo ${{ secrets.HF_TOKEN }} | huggingface-cli login --token ${{ secrets.HF_TOKEN }}
 
     - name: Deploy to Huggingface
       run: |
-        huggingface-cli repo create my-streamlit-app --type=space --private
+        # Check if the repo exists before trying to create it
+        if ! huggingface-cli repo info Canstralian/PhishingEmailEvaluation; then
+          huggingface-cli repo create my-streamlit-app --type=space --private
+        fi
         huggingface-cli repo upload --repo-id Canstralian/PhishingEmailEvaluation app.py requirements.txt
-        huggingface-cli space hardware --repo-id Canstralian/PhishingEmailEvaluation-app --hardware cpu-basic
+        huggingface-cli space hardware --repo-id Canstralian/PhishingEmailEvaluation --hardware cpu-basic
       continue-on-error: true
